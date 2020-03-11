@@ -15,6 +15,11 @@ configurations {
     }
 }
 
+bootRun {
+    sourceResources sourceSets.main
+}
+
+
 repositories {
     mavenCentral()
 }
