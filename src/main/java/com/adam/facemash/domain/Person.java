@@ -1,4 +1,4 @@
-package com.adam.facemash.models;
+package com.adam.facemash.domain;
 
 
 public class Person {
