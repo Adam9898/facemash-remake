@@ -3,28 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to Facemash</title>
-    <link type="text/css" rel="stylesheet" href="scss/app.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script src="js/bundle.js"></script>
 </head>
 <body>
     <section th:insert="fragments/header" id="header"></section>
     <section id="login-section">
-        <div>
+        <div class="auth-container">
             <form class="auth-form" method="post">
-                <div class="inputbox">
+                <div>
                     <label for="login-username"><img src="img/icons/facemash-user.png" alt="username"></label>
                     <input type="text" name="login-username" id="login-username" placeholder="username">
                 </div>
-                <div class="inputbox">
+                <div>
                     <label for="login-password"><img src="img/icons/facemash-password.png" alt="password"></label>
                     <input type="password" name="login-password" id="login-password" placeholder="password">
                 </div>
                 <div>
-                    <a>Register</a>
+                    <a id="open-modal" onclick="LogicConnector.initModal(getElementById('register-section'))">Register</a>
                     <button class="btn-old-school" type="submit" name="login-submit">Login</button>
                 </div>
             </form>
         </div>
     </section>
+    <section class="modal-section" hidden th:insert="fragments/register-modal" id="register-section"></section>
     <section th:insert="fragments/footer" id="footer"></section>
+    <!-- empty element which gets shown once a modal is activated. It generates a transparent background effect -->
+    <div class="transparent-background" hidden></div>
 </body>
 </html>

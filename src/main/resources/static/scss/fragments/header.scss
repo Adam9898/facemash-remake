@@ -1,0 +1,16 @@
+@import "../colors";
+
+#header {
+    background-color: $mainBackground;
+    header {
+        h1 {
+            color: $textContrastColor1;
+            margin-top: 0;
+            padding: 20px;
+            text-align: center;
+            font-size: 30pt;
+            font-family: Arial, serif;
+            letter-spacing: 3px;
+        }
+    }
+}

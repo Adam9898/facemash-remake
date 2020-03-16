@@ -1,6 +1,13 @@
 // main app settings variables
 $footerSideMargin: 2em;
-$mainFont: playfair, sans-serif;
+$mainFont: playfair;
+$mainFontWithFallback: $mainFont, sans-serif;
 $mainFontSize: 12pt;
 $mainSmallFontSize: 10pt;
 $fontFolderPath: "../fonts";
+$mainIconSize: 20px;
+$zIndexBase: 1;
+$zIndexUpper: 2;
+$mainPaddingSize: 8px;
+$extendedPaddingSize: 20px;
+$mainInputMargin: 12px;

@@ -48,6 +48,12 @@ export class SignUpModal extends Modal {
             .on("keydown", this.individuallyValidateUsername);
     }
 
+    protected focus() {
+        $(`#${this.modalID} .modal input`).first().get(0).focus();
+    }
+
+
+
     private validateUsername() {
         // todo ajax from database
         return true;

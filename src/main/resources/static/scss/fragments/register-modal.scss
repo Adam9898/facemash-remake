@@ -1,0 +1,21 @@
+#register-section {
+    > div {
+        h4 {
+            text-align: center;
+            margin-top: 10px;
+        }
+        background-color: $contrastBackground;
+        padding: $mainPaddingSize;
+        padding-bottom: $mainInputMargin;
+        left: 0;
+        right: 0;
+        top: 35%;
+        form {
+            padding-left: $extendedPaddingSize - $mainPaddingSize;
+            padding-right: $extendedPaddingSize - $mainPaddingSize;
+            button {
+                align-self: center;
+            }
+        }
+    }
+}

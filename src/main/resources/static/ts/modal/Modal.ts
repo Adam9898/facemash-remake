@@ -8,15 +8,17 @@ export abstract class Modal {
 
     }
 
+
     open() {
         this.modalContext.show();
+        this.focus();
     }
 
     close() {
-        console.log("closing");
         this.modalContext.hide();
     }
 
+    protected abstract focus(): void;
 
     public abstract validate(): boolean
 }

@@ -1,0 +1,22 @@
+@import "../colors";
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    background-color: $mainBackground;
+    width: 100%;
+    footer {
+        font-size: 11pt;
+        margin-right: $footerSideMargin;
+        margin-left: $footerSideMargin;
+        p {
+            color: $textContrastColor1;
+            a {
+                color: $footerLinksColor;
+                &:hover {
+                    color: lighten($footerLinksColor, 30%)
+                }
+            }
+        }
+    }
+}
