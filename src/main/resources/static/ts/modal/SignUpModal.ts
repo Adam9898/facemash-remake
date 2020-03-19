@@ -1,81 +1,170 @@
-import {Modal} from "./Modal";
-import $ from "jquery";
+import {Modal} from './Modal';
+import $ from 'jquery';
+import {User} from '../models/User';
+import {validate, Validator, ValidationError} from 'class-validator';
+
 
 /**
- *  This class uses an implicit singleton pattern. Just initalize it as you would do it any other way.
+ *  This class uses an implicit singleton pattern. Just initialize it as you would do it any other way.
  */
 export class SignUpModal extends Modal {
 
     private static instance: SignUpModal;
+    private user = new User();
+    private validator = new Validator();
 
-    constructor(context: JQuery<HTMLElement>,
-                private _username = "",
-                private _password = "",
-                private _reEnteredPassword = "") {
+    constructor(context: JQuery<HTMLElement>) {
         super(context);
         if (SignUpModal.instance) {
             return SignUpModal.instance;
+        } else {
+            SignUpModal.instance = this;
+            this.activateModalListeners();
+            console.log("registering modal listeners");
         }
-        this.activateModalListeners();
-    }
-
-    get username(): string {
-        return this._username;
-    }
-
-    set username(value: string) {
-        this._username = value;
-    }
-
-    get password(): string {
-        return this._password;
-    }
-
-    set password(value: string) {
-        this._password = value;
-    }
-
-    get reEnteredPassword(): string {
-        return this._reEnteredPassword;
-    }
-
-    set reEnteredPassword(value: string) {
-        this._reEnteredPassword = value;
     }
 
     private activateModalListeners() {
-        $(this.modalContext.attr('id') + ' button')
-            .on("keydown", this.individuallyValidateUsername);
+        $('#register-button')
+            .on('click', (event) => {
+                event.preventDefault();
+                this.validate();
+            });
+        $('#register-username')
+            .on('keyup', () => {
+                this.user.username = '' + $('#register-username').val();
+                this.validateUsername();
+            });
+        $('#register-password')
+            .on('keyup', () => {
+                this.user.password = '' + $('#register-password').val();
+                this.validatePassword();
+            });
+        $('#register-re-password')
+            .on('keyup', () => {
+                this.user.rePassword = '' + $('#register-re-password').val();
+                this.validateRePassword();
+            });
     }
 
     protected focus() {
         $(`#${this.modalID} .modal input`).first().get(0).focus();
     }
 
-
-
-    private validateUsername() {
-        // todo ajax from database
-        return true;
+    private async validate() {
+        const valid = await this.validateUsername() && await this.validatePassword() && await this.validateRePassword();
+        if (valid) {
+            this.registerUser();
+        }
     }
 
-    /**
-     * Use this method to check if the given username still available, and based on the boolean value it will display
-     * the proper message to the user.
-     */
-    private individuallyValidateUsername() {
-
+    private registerUser() {
+        //todo ajax call to server, register the user and then redirect to the main app
+        this.user = new User(); // flushing sensitive data from memory
     }
 
-    displayUsernameValid() {
-
+    private async validateUsername() {
+        let returnBool = false;
+        try {
+            const validationErrors = await validate(this.user);
+            const validationError = validationErrors
+                .find(element => element.property === '_username');
+            if (validationError) {
+                this.displayUsernameValidationError(validationError);
+            } else {
+                this.displayUsernameValidationSuccess();
+                returnBool = true;
+            }
+        } catch (e) {
+            console.log('Error occurred during username validation: ' + e);
+        }
+        return returnBool;
     }
 
-    displayUsernameAlreadyExists() {
-
+    private displayUsernameValidationSuccess() {
+        $('#register-username')
+            .removeClass('validation-error')
+            .addClass('validation-success');
+        $('#username-error').hide().text('');
     }
 
-    validate() {
-        return false;
+    private displayUsernameValidationError(validationError: ValidationError) {
+        $('#register-username')
+            .removeClass('validation-success')
+            .addClass('validation-error');
+        $('#username-error').text(validationError.constraints[Object.keys(validationError.constraints)[0]]).show();
+    }
+
+    private async validatePassword() {
+        let returnBool = false;
+        try {
+            const validationErrors = await validate(this.user);
+            const validationError = validationErrors
+                .find((element) => element.property === '_password');
+            if (validationError) {
+                this.displayPasswordValidationError(validationError);
+            } else {
+                this.displayPasswordValidationSuccess();
+                returnBool = true;
+            }
+        } catch (e) {
+            console.log('Error occurred during password validation: ' + e);
+        }
+        return returnBool;
+    }
+
+    private displayPasswordValidationSuccess() {
+        $('#register-password')
+            .removeClass('validation-error')
+            .addClass('validation-success');
+        $('#password-error').hide().text('');
+    }
+
+    private displayPasswordValidationError(validationError: ValidationError) {
+        $('#register-password')
+            .removeClass('validation-success')
+            .addClass('validation-error');
+        $('#password-error').text(validationError.constraints[Object.keys(validationError.constraints)[0]]).show();
+    }
+
+    private async validateRePassword() {
+        let returnBool = false;
+        try {
+            const validationErrors = await validate(this.user);
+            const validationError = validationErrors
+                .find((element) => element.property === '_rePassword');
+            if (validationError) {
+                this.displayRePasswordValidationError(validationError);
+            } else if (!this.validator.equals(this.user.password, this.user.rePassword)) {
+                this.displayRePasswordNotEqualsValidationError();
+            } else {
+                this.displayRePasswordValidationSuccess();
+                returnBool = true;
+            }
+        } catch (e) {
+            console.log('Error occurred during retype password validation: ' + e);
+        }
+        return returnBool;
+    }
+
+    private displayRePasswordValidationSuccess() {
+        $('#register-re-password')
+            .removeClass('validation-error')
+            .addClass('validation-success');
+        $('#re-password-error').hide().text('');
+    }
+
+    private displayRePasswordValidationError(validationError: ValidationError) {
+        $('#register-re-password')
+            .removeClass('validation-success')
+            .addClass('validation-error');
+        $('#re-password-error').text(validationError.constraints[Object.keys(validationError.constraints)[0]]).show();
+    }
+
+    private displayRePasswordNotEqualsValidationError() {
+        $('#register-re-password')
+            .removeClass('validation-success')
+            .addClass('validation-error');
+        $('#re-password-error').text('Password does not match!').show();
     }
 }

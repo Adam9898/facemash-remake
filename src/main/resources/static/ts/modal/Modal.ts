@@ -19,6 +19,4 @@ export abstract class Modal {
     }
 
     protected abstract focus(): void;
-
-    public abstract validate(): boolean
 }
