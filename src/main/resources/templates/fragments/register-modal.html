@@ -3,20 +3,23 @@
             aria-label="Close registration modal">&times;</button>
     <h4>Register</h4>
     <form class="auth-form" method="post">
+        <p class="error-text" id="username-error"></p>
         <div>
             <label for="register-username"><img src="img/icons/facemash-user.png" alt="username"></label>
             <input id="register-username" name="register-username" type="text" placeholder="Enter a username" autofocus>
             <span hidden>taken</span>
             <span hidden></span>
         </div>
+        <p class="error-text" id="password-error"></p>
         <div>
             <label for="register-password"><img src="img/icons/facemash-password.png" alt="password"></label>
             <input id="register-password" name="register-password" type="password" placeholder="Enter a strong password">
         </div>
+        <p class="error-text" id="re-password-error"></p>
         <div>
             <label for="register-re-password"><img src="img/icons/facemash-password.png" alt="password"></label>
             <input id="register-re-password" name="register-re-password" type="password" placeholder="Re-enter your password">
         </div>
-        <button class="btn-old-school" type="submit" name="register-button">Sign up</button>
+        <button id="register-button" class="btn-old-school" type="submit" name="register-button">Sign up</button>
     </form>
 </div>

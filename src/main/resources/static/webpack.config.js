@@ -41,7 +41,7 @@ module.exports = {
                         loader: 'file-loader',
                         options: {
                             name: '[name].[ext]',
-                            outputPath: '/fonts'
+                            outputPath: '/fonts/final'
                         }
                     }
                 ]
@@ -49,6 +49,6 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.ts', 'scss']
+        extensions: ['.ts', '.tsx', '.js', '.json', 'scss']
     }
 }

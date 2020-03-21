@@ -52,7 +52,9 @@ export class SignUpModal extends Modal {
     }
 
     private async validate() {
-        const valid = await this.validateUsername() && await this.validatePassword() && await this.validateRePassword();
+        const validArr = [];
+        validArr.push(await this.validateUsername(), await this.validatePassword(), await this.validateRePassword());
+        const valid =  validArr[0] && validArr[1] && validArr[2];
         if (valid) {
             this.registerUser();
         }
@@ -61,6 +63,7 @@ export class SignUpModal extends Modal {
     private registerUser() {
         //todo ajax call to server, register the user and then redirect to the main app
         this.user = new User(); // flushing sensitive data from memory
+        console.log('registering the user');
     }
 
     private async validateUsername() {

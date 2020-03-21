@@ -19,3 +19,18 @@
         }
     }
 }
+
+// classes
+.validation-success {
+    border: solid 2px $success !important;
+}
+
+.validation-error {
+    border: solid 2px $danger !important;
+}
+
+.error-text {
+    display: none;
+    font-size: $mainSmallFontSize;
+    color: $danger;
+}
