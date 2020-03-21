@@ -52,6 +52,7 @@ export class SignUpModal extends Modal {
     }
 
     private async validate() {
+        // todo BUG when user clicks sign up button: empty input field gets validated as if it were valid.
         const validArr = [];
         validArr.push(await this.validateUsername(), await this.validatePassword(), await this.validateRePassword());
         const valid =  validArr[0] && validArr[1] && validArr[2];

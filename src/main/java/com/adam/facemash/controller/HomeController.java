@@ -12,4 +12,10 @@ public class HomeController {
     public String mainRoute() {
         return "index";
     }
+
+    @RequestMapping("/app")
+    public String appRoute() { return "main"; }
+
+    @RequestMapping("/top")
+    public String topRoute() { return "top"; }
 }

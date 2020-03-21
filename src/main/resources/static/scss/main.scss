@@ -1,0 +1,71 @@
+#app-section {
+    #static {
+        p {
+            text-align: center;
+            font-size: $bigFontSize;
+            font-weight: bold;
+            &:last-child {
+                font-size: $bigFontSize + 6pt;
+            }
+        }
+    }
+    #person-container {
+        display: flex;
+        justify-content: center;
+       .person {
+            form {
+                p { // name text
+                    text-align: center;
+                    max-width: $imageWidth;
+                    font-size: $bigFontSize;
+                    font-weight: bold;
+                    color: $textAppContrastColor;
+
+                }
+                button {
+                    img {
+                        display: block;
+                        width: $imageWidth;
+                    }
+                    @include unstyled-button;
+                    cursor: pointer;
+                    &:hover, &:focus {
+                        outline: $textAppContrastColor 4px solid;
+                    }
+                }
+                #align-or-box {
+                    display: flex;
+                    align-items: center;
+
+                    span {
+                        align-self: center;
+                        margin: 20px;
+                        font-weight: bold;
+                        font-size: 18pt;
+                    }
+                }
+            }
+        }
+    }
+}
+#pre-footer {
+    text-align: center;
+}
+
+
+// ========================================= ** Responsive styles ** ===================================================
+
+// todo restructure the html so that the "OR" text id display between the pictures when the view device is a smart phone
+@media (max-width: 767px)  {
+    #app-section {
+        #person-container {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+    footer {
+        display: none;
+    }
+}
+
+// ======================================= ** Responsive section end ** ================================================

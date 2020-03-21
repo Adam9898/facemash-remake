@@ -3,14 +3,29 @@
 #header {
     background-color: $mainBackground;
     header {
+        display: grid;
+        grid-template-columns: 1fr repeat(2, auto) 1fr;
         h1 {
-            color: $textContrastColor1;
+            color: $textMainContrastColor;
             margin-top: 0;
+            margin-bottom: 0;
             padding: 20px;
             text-align: center;
             font-size: 30pt;
             font-family: Arial, serif;
             letter-spacing: 3px;
+            grid-column-start: 3;
+        }
+        > div {
+            display: flex;
+            justify-self: end;
+            align-self: center;
+            align-items: center;
+            flex-flow: row;
+            color: $textMainContrastColor;
+            > span { // username
+                margin-right: 8px;
+            }
         }
     }
 }

@@ -1,10 +1,6 @@
 @import "colors";
 @import "variables";
-//================================== ** importing page styles ** =======================================
-@import "index";
-@import "main";
-@import "top";
-//================================== ** importing section end ** =======================================
+
 
 // importing app-scope fonts
 @font-face {
@@ -30,6 +26,8 @@ html {
         font-family: $mainFontWithFallback;
         font-size: $mainFontSize;
         section {
+            padding-right: $mainPaddingSize;
+            padding-left: $mainPaddingSize;
         }
     }
 }
@@ -94,3 +92,10 @@ html {
         z-index: $zIndexBase;
     }
 }
+
+
+//================================== ** importing page styles ** =======================================
+@import "index";
+@import "main";
+@import "top";
+//================================== ** importing section end ** =======================================
