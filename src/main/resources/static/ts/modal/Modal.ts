@@ -1,5 +1,3 @@
-import $ from "jquery";
-
 export abstract class Modal {
 
     protected readonly modalID = this.modalContext.attr("id");

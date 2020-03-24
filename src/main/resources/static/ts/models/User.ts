@@ -1,6 +1,5 @@
 import {Equals, IsNotEmpty, Length, Matches} from 'class-validator';
 import {Available} from '../validation/Available';
-import {SignUpModal} from '../modal/SignUpModal';
 
 /**
  *  The User class is close to a POJO (Plain Old JavaScript Object), but it uses decorators for validation.
