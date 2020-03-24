@@ -11,11 +11,13 @@ describe('Sign up modal', () => {
 
 
     // This is a test for the implicit singleton pattern
-    it('should give back same instance', function () {
+    it('should give back same instance', () => {
         expect(new SignUpModal($(testDomElement))).toBe(signUpModal);
     });
 
-    it('should have a modal context', function () {
+    // this is not a good practice, but I wanted to try out reflection with javascript. Generally speaking, you only
+    // want to test the public api, so no private fields and methods
+    it('should have a modal context', () => {
         expect(Reflect.get(signUpModal, 'modalContext')).toBeTruthy();
     });
 })
