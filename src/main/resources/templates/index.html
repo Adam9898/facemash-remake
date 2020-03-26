@@ -10,19 +10,21 @@
     <section th:insert="fragments/header" id="header"></section>
     <section id="login-section">
         <div class="auth-container">
-            <form class="auth-form" method="post">
+            <form th:action="@{/login}" class="auth-form" method="post">
+                <div th:if="${param.error}">Incorrect username or password</div>
                 <div>
                     <label for="login-username"><img src="img/icons/facemash-user.png" alt="username"></label>
-                    <input type="text" name="login-username" id="login-username" placeholder="username">
+                    <input type="text" name="login-username" id="login-username" placeholder="username" required>
                 </div>
                 <div>
                     <label for="login-password"><img src="img/icons/facemash-password.png" alt="password"></label>
-                    <input type="password" name="login-password" id="login-password" placeholder="password">
+                    <input type="password" name="login-password" id="login-password" placeholder="password" required>
                 </div>
                 <div>
                     <a id="open-modal" onclick="LogicConnector.initModal(getElementById('register-section'))">Register</a>
                     <button class="btn-old-school" type="submit" name="login-submit">Login</button>
                 </div>
+                <div th:if="${param.logout}">Signed out successfully</div>
             </form>
         </div>
     </section>
