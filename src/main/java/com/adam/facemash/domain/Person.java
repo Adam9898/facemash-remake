@@ -1,11 +1,8 @@
 package com.adam.facemash.domain;
 
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+@Entity
 public class Person {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

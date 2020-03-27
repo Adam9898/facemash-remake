@@ -1,18 +1,25 @@
 package com.adam.facemash.domain;
 
+import com.adam.facemash.enums.UserRole;
+import com.adam.facemash.validation.Available;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "users")
 public class User {
-
-    // todo user validation upon registration from the backend
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
+    @NotNull
+    @Size(min = 3, max = 12)
+    @Available
     @Column(unique = true)
     private String username;
 
@@ -48,5 +55,11 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public void addRoles(UserRole userRole) {
+        if (this.roles == null || this.roles.isEmpty())
+            this.roles = new HashSet<>();
+        this.roles.add(new Role(userRole));
     }
 }

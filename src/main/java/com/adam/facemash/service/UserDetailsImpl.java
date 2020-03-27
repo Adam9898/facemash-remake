@@ -1,4 +1,4 @@
-/*package com.adam.facemash.service;
+package com.adam.facemash.service;
 
 import com.adam.facemash.domain.Role;
 import com.adam.facemash.domain.User;
@@ -23,39 +23,38 @@ public class UserDetailsImpl implements UserDetails {
         Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
         Set<Role> roles = user.getRoles();
         for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getRole()));
+            authorities.add(new SimpleGrantedAuthority(role.getRole().toString()));
         }
         return authorities;
     }
 
     @Override
-    public String getPassword() {
-        return null;
+    public String getUsername() {
+        return user.getUsername();
     }
 
     @Override
-    public String getUsername() {
-        return null;
+    public String getPassword() {
+        return user.getPassword();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return user.getEnabled();
+        return true;
     }
 }
-*/
