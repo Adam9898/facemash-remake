@@ -1,8 +1,11 @@
 package com.adam.facemash.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "people")
 public class Person {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +16,9 @@ public class Person {
 
     @Column(nullable = false)
     private int voteCount;
+
+    @ManyToMany(mappedBy = "people")
+    private Set<User> users = new HashSet<>();
 
     public long getId() {
         return id;

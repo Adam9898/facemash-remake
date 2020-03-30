@@ -14,8 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
-import java.security.SecureRandom;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.Map;
 
@@ -78,8 +78,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return passwordEncoder.encode(password);
     }
 
-    public void startNewSession(User user, HttpSession httpSession) {
-        httpSession.setAttribute("username", user.getUsername());
-        System.out.println(httpSession.getAttribute("username"));
+    public void startNewSession(String username, String password, HttpServletRequest request) {
+        try {
+            System.out.println(username);
+            System.out.println(password);
+            request.login(username, password);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
     }
 }

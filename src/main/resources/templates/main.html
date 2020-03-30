@@ -16,23 +16,25 @@
     <div id="person-container">
         <div class="person">
             <form method="post">
-                <input type="hidden" value="1">
+                <input type="hidden" value="1" th:value="${girls[0].getId()}">
                 <div id="align-or-box">
                     <button type="submit">
-                        <img src="/img/people/41.jpg" alt="Susan">
+                        <img src="/img/people/41.jpg" th:src="/img/people/${girls[0].getId()}.jpg" alt="Susan"
+                             th:alt="${girls[0].getNickname()}">
                     </button>
                     <span>OR</span>
                 </div>
-                <p>Susan</p>
+                <p th:text="${girls[0].getNickname()}">Susan</p>
             </form>
         </div>
         <div class="person">
             <form method="post">
-                <input type="hidden" value="2">
+                <input type="hidden" value="2" th:value="${girls[1].getId()}">
                 <button type="submit">
-                    <img src="/img/people/31.jpg" alt="Alexa">
+                    <img src="/img/people/31.jpg" th:src="/img/people/${girls[1].getId()}.jpg" alt="Alexa"
+                         th:alt="${girls[1].getNickname()}">
                 </button>
-                <p>Alexa</p>
+                <p th:text="${girls[1].getNickname()}">Alexa</p>
             </form>
         </div>
     </div>

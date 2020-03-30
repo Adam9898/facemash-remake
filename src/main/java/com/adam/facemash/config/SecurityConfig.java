@@ -50,11 +50,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         try {
             httpSecurity
                     .authorizeRequests()
-                    .antMatchers("/").permitAll()
+                    .antMatchers("/").not().authenticated()
                     .antMatchers("/registration").permitAll()
                     .and()
                     .formLogin()
                     .loginPage("/")
+                    .defaultSuccessUrl("/app")
                     .permitAll()
                     .and()
                     .logout()
