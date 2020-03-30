@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+import java.security.SecureRandom;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -21,11 +24,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+    private PasswordEncoder passwordEncoder;
     private UniqueUsernameValidator uniqueUsernameValidator;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Autowired
@@ -55,19 +64,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void registerUser(User user) {
-        if (roleExists(UserRole.REGULAR)) {
-            user.getRoles().add(new Role(UserRole.REGULAR));
+        Role alreadyDefinedRole = roleRepository.findByRole(UserRole.ROLE_REGULAR);
+        if (alreadyDefinedRole != null) {
+            user.getRoles().add(alreadyDefinedRole);
         } else {
-            user.addRoles(UserRole.REGULAR);
+            user.addRoles(UserRole.ROLE_REGULAR);
         }
+        user.setPassword(hashPassword(user.getPassword()));
         userRepository.save(user);
     }
 
-    private boolean roleExists(UserRole userRole) {
-    boolean returnValue = false;
-        if (roleRepository.findByRole(userRole.toString()) != null) {
-            returnValue = true;
-        }
-        return returnValue;
+    private String hashPassword(String password) {
+        return passwordEncoder.encode(password);
+    }
+
+    public void startNewSession(User user, HttpSession httpSession) {
+        httpSession.setAttribute("username", user.getUsername());
+        System.out.println(httpSession.getAttribute("username"));
     }
 }

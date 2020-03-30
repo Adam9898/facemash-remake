@@ -27,7 +27,7 @@ export class SignUpModal extends Modal {
     private activateModalListeners() {
         $('#register-button')
             .on('click', (event) => {
-                //event.preventDefault();
+                event.preventDefault();
                 this.validate();
             });
         $('#register-username')
@@ -62,9 +62,8 @@ export class SignUpModal extends Modal {
     }
 
     private registerUser() {
-        this.user = new User(); // flushing sensitive data from memory
         console.log('registering the user');
-        //$('#register-button').trigger('submit');
+        $('#register-form').trigger('submit');
     }
 
     private async validateUsername() {

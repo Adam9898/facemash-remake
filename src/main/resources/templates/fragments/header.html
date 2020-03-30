@@ -1,8 +1,8 @@
 <header xmlns:th="http://www.thymeleaf.org">
     <h1>FACEMASH</h1>
-    <div>
-        <span sec:authorize="isAuthenticated()" sec:authentication="name">Adam8899</span>
-        <form method="post">
+    <div sec:authorize="isAuthenticated()">
+        <span sec:authentication="name">username</span>
+        <form th:action="@{/logout}" method="post">
             <button type="submit" class="btn-old-school">Log out</button>
         </form>
     </div>

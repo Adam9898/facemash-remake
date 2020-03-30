@@ -2,11 +2,11 @@
     <button onclick="LogicConnector.closeModal(getElementById('register-section'))" class="btn-close" type="button"
             aria-label="Close registration modal">&times;</button>
     <h4>Register</h4>
-    <form th:action="@{/registration}" th:object="${user}" class="auth-form" method="post">
+    <form id="register-form" th:action="@{/registration}" th:object="${user}" class="auth-form" method="post">
         <p class="error-text" id="username-error"></p>
         <div>
             <label for="register-username"><img src="img/icons/facemash-user.png" alt="username"></label>
-            <input th:username="*{username}" id="register-username" name="register-username" type="text" placeholder="Enter a username" autofocus>
+            <input th:field="*{username}" id="register-username" name="register-username" type="text" placeholder="Enter a username" autofocus>
             <span hidden>taken</span>
             <span hidden></span>
         </div>
