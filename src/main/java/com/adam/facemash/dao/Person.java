@@ -1,4 +1,4 @@
-package com.adam.facemash.domain;
+package com.adam.facemash.dao;
 
 import javax.persistence.*;
 import java.util.HashSet;

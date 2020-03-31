@@ -1,4 +1,4 @@
-package com.adam.facemash.domain;
+package com.adam.facemash.dao;
 
 import com.adam.facemash.enums.UserRole;
 

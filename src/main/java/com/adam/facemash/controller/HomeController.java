@@ -1,8 +1,11 @@
 package com.adam.facemash.controller;
 
-import com.adam.facemash.domain.User;
+import com.adam.facemash.dao.Person;
+import com.adam.facemash.dao.User;
+import com.adam.facemash.dto.Vote;
 import com.adam.facemash.service.PersonService;
 import com.adam.facemash.service.UserService;
+import com.adam.facemash.service.VoteService;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,12 @@ public class HomeController {
     private Logger logger = LoggerFactory.getLogger(HomeController.class);
     private UserService userService;
     private PersonService personService;
+    private VoteService voteService;
+
+    @Autowired
+    public void setVoteService(VoteService voteService) {
+        this.voteService = voteService;
+    }
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -49,7 +58,7 @@ public class HomeController {
     }
 
     @PostMapping("/registration")
-    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
+    public String registerUser(@ModelAttribute("user") User user, BindingResult bindingResult,
                                HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             logger.error(bindingResult.getFieldErrors().toString());
@@ -63,10 +72,30 @@ public class HomeController {
     }
 
     @Secured("ROLE_REGULAR")
+    @PostMapping("/app/vote")
+    public String vote(@Valid @ModelAttribute("vote") Vote vote, BindingResult bindingResult, Principal principal) {
+        System.out.println(vote.getChosenPersonId());
+        System.out.println(vote.getLeftOutPersonId());
+        if (bindingResult.hasErrors()) {
+            logger.error(bindingResult.getFieldErrors().toString());
+        } else {
+            voteService.vote(vote);
+        }
+        return "redirect:/app";
+    }
+
+    @Secured("ROLE_REGULAR")
     @RequestMapping("/app")
     public String appRoute(Model model, Principal principal) {
-        model.addAttribute("girls", personService.generatePeople(principal.getName()));
-        return "main";
+        String returnValue = "main";
+        Person[] generatedPeople = personService.generatePeople(principal.getName());
+        if (personService.noMorePersonLeft(generatedPeople) || generatedPeople.length < 2) {
+            returnValue = "empty";
+        } else {
+            model.addAttribute("girls", generatedPeople);
+            model.addAttribute("vote", new Vote());
+        }
+        return returnValue;
     }
 
     @Secured("ROLE_REGULAR")

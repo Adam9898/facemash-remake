@@ -1,7 +1,7 @@
 package com.adam.facemash.service;
 
-import com.adam.facemash.domain.Role;
-import com.adam.facemash.domain.User;
+import com.adam.facemash.dao.Role;
+import com.adam.facemash.dao.User;
 import com.adam.facemash.enums.UserRole;
 import com.adam.facemash.repository.RoleRepository;
 import com.adam.facemash.repository.UserRepository;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -80,8 +79,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     public void startNewSession(String username, String password, HttpServletRequest request) {
         try {
-            System.out.println(username);
-            System.out.println(password);
             request.login(username, password);
         } catch (ServletException e) {
             e.printStackTrace();

@@ -1,7 +1,7 @@
 package com.adam.facemash.service;
 
-import com.adam.facemash.domain.Role;
-import com.adam.facemash.domain.User;
+import com.adam.facemash.dao.Role;
+import com.adam.facemash.dao.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

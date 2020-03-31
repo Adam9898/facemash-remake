@@ -1,6 +1,6 @@
 package com.adam.facemash.service;
 
-import com.adam.facemash.domain.User;
+import com.adam.facemash.dao.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;

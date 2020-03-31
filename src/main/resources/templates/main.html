@@ -15,11 +15,12 @@
     </div>
     <div id="person-container">
         <div class="person">
-            <form method="post">
-                <input type="hidden" value="1" th:value="${girls[0].getId()}">
+            <form th:action="@{/app/vote}" th:object="${vote}" method="post">
+                <input type="hidden" value="1" th:value="${girls[0].getId()}" th:name="chosenPersonId">
+                <input type="hidden" value="2" th:value="${girls[1].getId()}" th:name="leftOutPersonId">
                 <div id="align-or-box">
                     <button type="submit">
-                        <img src="/img/people/41.jpg" th:src="/img/people/${girls[0].getId()}.jpg" alt="Susan"
+                        <img src="/img/people/41.jpg" th:src="@{|/img/people/${girls[0].getId()}.jpg|}" alt="Susan"
                              th:alt="${girls[0].getNickname()}">
                     </button>
                     <span>OR</span>
@@ -28,10 +29,11 @@
             </form>
         </div>
         <div class="person">
-            <form method="post">
-                <input type="hidden" value="2" th:value="${girls[1].getId()}">
+            <form th:action="@{/app/vote}" th:object="${vote}" method="post">
+                <input type="hidden" value="1" th:value="${girls[0].getId()}" th:name="leftOutPersonId">
+                <input type="hidden" value="2" th:value="${girls[1].getId()}" th:name="chosenPersonId">
                 <button type="submit">
-                    <img src="/img/people/31.jpg" th:src="/img/people/${girls[1].getId()}.jpg" alt="Alexa"
+                    <img src="/img/people/31.jpg" th:src="@{|/img/people/${girls[1].getId()}.jpg|}" alt="Alexa"
                          th:alt="${girls[1].getNickname()}">
                 </button>
                 <p th:text="${girls[1].getNickname()}">Alexa</p>
