@@ -28,7 +28,7 @@ export class SignUpModal extends Modal {
         $('#register-button')
             .on('click', (event) => {
                 event.preventDefault();
-                this.validate();
+                this.validate().then(this.registerUser);
             });
         $('#register-username')
             .on('keyup', () => {
@@ -56,8 +56,8 @@ export class SignUpModal extends Modal {
         const validArr = [];
         validArr.push(await this.validateUsername(), await this.validatePassword(), await this.validateRePassword());
         const valid =  validArr[0] && validArr[1] && validArr[2];
-        if (valid) {
-            this.registerUser();
+        if (!valid) {
+            throw new Error("Modal validation failed");
         }
     }
 

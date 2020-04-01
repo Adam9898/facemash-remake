@@ -29,7 +29,6 @@ public class NotAlreadyVotedValidator implements ConstraintValidator<NotInAlread
 
     @Override
     public boolean isValid(Long personId, ConstraintValidatorContext context) {
-        System.out.println("Authentication: " + sessionCache.getCurrentlyLoggedInUser().getUsername());
         boolean returnValue = true;
         if (voteContextPersonExists(personId)) {
             returnValue = false;
@@ -40,7 +39,6 @@ public class NotAlreadyVotedValidator implements ConstraintValidator<NotInAlread
     private boolean voteContextPersonExists(Long personId) {
         Person voteContextPerson = personRepository.findPersonBySpecificPersonAndUserID(personId,
                 sessionCache.getCurrentlyLoggedInUser().getId());
-        System.out.println(voteContextPerson);
         return voteContextPerson != null;
     }
 }

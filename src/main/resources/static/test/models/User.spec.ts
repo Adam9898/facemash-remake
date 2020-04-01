@@ -1,5 +1,6 @@
 import {User} from '../../ts/models/User';
-import {validate, validateOrReject} from 'class-validator'
+import * as testValidationFunctions from 'class-validator'
+import {validateOrReject} from 'class-validator';
 
 describe('A user model', () => {
     let user: User;
@@ -20,6 +21,7 @@ describe('A user model', () => {
 
     // testing validation
     it('should validate user', async () => {
+        spyOn(testValidationFunctions, 'validateOrReject').and.returnValue(Promise.resolve());
         let validationResult = true;
         try {
             await validateOrReject(user);

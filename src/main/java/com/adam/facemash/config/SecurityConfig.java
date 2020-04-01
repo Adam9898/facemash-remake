@@ -60,7 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .logout()
                     .logoutSuccessUrl("/?logout")
-                    .permitAll();
+                    .permitAll()
+                    .and().httpBasic();
         } catch (Exception e) {
             e.printStackTrace();
         }

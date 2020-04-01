@@ -26,5 +26,13 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
     @Query(value = "INSERT INTO users_people VALUES (:userid, :personid)", nativeQuery = true)
     void saveVoteContext(@Param("userid") Long userId, @Param("personid") Long personId);
 
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE people SET vote_count = vote_count+1 WHERE id = :personid", nativeQuery = true)
+    void addVote(@Param("personid") Long personId);
+
+    @Query(value = "SELECT * FROM people ORDER BY vote_count DESC LIMIT 10", nativeQuery = true)
+    List<Person> findTop10();
+
 
 }

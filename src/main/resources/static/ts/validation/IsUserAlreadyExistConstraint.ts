@@ -2,8 +2,9 @@ import {ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface} 
 
 @ValidatorConstraint({async: true})
 export class IsUserAlreadyExistConstraint implements ValidatorConstraintInterface {
-    validate(username: any, validationArguments?: ValidationArguments): Promise<boolean> | boolean {
-        // todo ajax api call to server to check username
-        return true;
+    async validate(username: string, validationArguments?: ValidationArguments) {
+        let response = await fetch(`/uniqueUser/${username}`);
+        let jsonResult: UniqueUsernameJSONFormat = await response.json();
+        return jsonResult.usernameIsValid;
     }
 }

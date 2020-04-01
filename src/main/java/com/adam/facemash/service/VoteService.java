@@ -26,5 +26,6 @@ public class VoteService {
         Long currentUserId = sessionCache.getCurrentlyLoggedInUser().getId();
         personRepository.saveVoteContext(currentUserId, voteObj.getChosenPersonId());
         personRepository.saveVoteContext(currentUserId, voteObj.getLeftOutPersonId());
+        personRepository.addVote(voteObj.getChosenPersonId());
     }
 }

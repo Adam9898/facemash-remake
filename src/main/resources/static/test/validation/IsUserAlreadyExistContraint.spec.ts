@@ -8,15 +8,15 @@ describe('A user already exist constraint validator ', () => {
          usernameValidator = new IsUserAlreadyExistConstraint();
     });
 
-    it('should call validate unique username', () => {
+   it('should call validate unique username', () => {
         spyOn(usernameValidator, 'validate');
         usernameValidator.validate('uniqusername');
         expect(usernameValidator.validate).toHaveBeenCalled();
     });
 
-    it('should validate unique username', () => {
-        spyOn(usernameValidator, 'validate').and.returnValue(true);
-        usernameValidator.validate('uniqusername');
-        expect(usernameValidator.validate('uniqusername')).toBeTrue();
+    it('should validate unique username', async () => {
+        spyOn(usernameValidator, 'validate').and.returnValue(Promise.resolve(true));
+        let expectResult = await usernameValidator.validate('uniqusername');
+        expect(expectResult).toBeTrue();
     });
 })

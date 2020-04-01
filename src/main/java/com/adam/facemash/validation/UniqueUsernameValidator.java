@@ -28,7 +28,8 @@ public class UniqueUsernameValidator implements ConstraintValidator<Available, S
     }
 
     /**
-     * Checks if the provided username is unique by querying the proper database, and returns a boolean value.
+     * Checks if the provided username is unique by querying the proper database.
+     * @return a boolean value.
      */
     public boolean isUsernameUnique(String username) {
         boolean returnValue = true;

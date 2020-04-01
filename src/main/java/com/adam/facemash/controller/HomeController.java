@@ -58,7 +58,7 @@ public class HomeController {
     }
 
     @PostMapping("/registration")
-    public String registerUser(@ModelAttribute("user") User user, BindingResult bindingResult,
+    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
                                HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             logger.error(bindingResult.getFieldErrors().toString());
@@ -73,9 +73,7 @@ public class HomeController {
 
     @Secured("ROLE_REGULAR")
     @PostMapping("/app/vote")
-    public String vote(@Valid @ModelAttribute("vote") Vote vote, BindingResult bindingResult, Principal principal) {
-        System.out.println(vote.getChosenPersonId());
-        System.out.println(vote.getLeftOutPersonId());
+    public String vote(@Valid @ModelAttribute("vote") Vote vote, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             logger.error(bindingResult.getFieldErrors().toString());
         } else {
@@ -100,5 +98,8 @@ public class HomeController {
 
     @Secured("ROLE_REGULAR")
     @RequestMapping("/top")
-    public String topRoute() { return "top"; }
+    public String topRoute(Model model) {
+        model.addAttribute("top", personService.getTop10());
+        return "top";
+    }
 }

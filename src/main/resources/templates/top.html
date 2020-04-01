@@ -12,58 +12,32 @@
 <section id="top">
     <div class="top">
         <div class="person">
-            <span>Alexa</span>
-            <img src="img/people/31.jpg" alt="Alexa">
-            <span>Votes: <span>2314</span></span>
+            <span th:text="${top.get(0).getNickname()}">Alexa</span>
+            <img src="img/people/31.jpg" th:src="@{|img/people/${top.get(0).getId()}.jpg|}" alt="Alexa"
+                 th:alt="${top.get(0).getNickname()}">
+            <span>Votes: <span th:text="${top.get(0).getVoteCount()}">2314</span></span>
         </div>
     </div>
     <div class="top">
         <div class="person">
-            <span>Susan</span>
-            <img src="img/people/41.jpg" alt="Susan">
-            <span>Votes: <span>1739</span></span>
+            <span th:text="${top.get(1).getNickname()}">Susan</span>
+            <img src="img/people/41.jpg" th:src="@{|img/people/${top.get(1).getId()}.jpg|}" alt="Susan"
+                 th:alt="${top.get(2).getNickname()}">
+            <span>Votes: <span th:text="${top.get(1).getVoteCount()}">1739</span></span>
         </div>
         <div class="person">
-            <span>Anna</span>
-            <img src="img/people/36.jpg" alt="Anna">
-            <span>Votes: <span>1650</span></span>
+            <span th:text="${top.get(2).getNickname()}">Anna</span>
+            <img src="img/people/36.jpg" th:src="@{|img/people/${top.get(2).getId()}.jpg|}" alt="Anna"
+                 th:alt="${top.get(2).getNickname()}">
+            <span>Votes: <span th:text="${top.get(2).getVoteCount()}">1650</span></span>
         </div>
     </div>
     <div class="top">
-        <div class="person">
-            <span>Christie</span>
-            <img src="img/people/45.jpg" alt="Christie">
-            <span>Votes: <span>1320</span></span>
-        </div>
-        <div class="person">
-            <span>Maria</span>
-            <img src="img/people/14.jpg" alt="Maria">
-            <span>Votes: <span>1312</span></span>
-        </div>
-        <div class="person">
-            <span>Melinda</span>
-            <img src="img/people/17.jpg" alt="Melinda">
-            <span>Votes: <span>1229</span></span>
-        </div>
-        <div class="person">
-            <span>Lisa</span>
-            <img src="img/people/18.jpg" alt="Lisa">
-            <span>Votes: <span>1211</span></span>
-        </div>
-        <div class="person">
-            <span>Grace</span>
-            <img src="img/people/9.jpg" alt="Grace">
-            <span>Votes: <span>1134</span></span>
-        </div>
-        <div class="person">
-            <span>Helen</span>
-            <img src="img/people/27.jpg" alt="Helen">
-            <span>Votes: <span>987</span></span>
-        </div>
-        <div class="person">
-            <span>Olivia</span>
-            <img src="img/people/24.jpg" alt="Olivia">
-            <span>Votes: <span>640</span></span>
+        <div th:each="index : ${#numbers.sequence(3, top.size()-1)}" class="person">
+            <span th:text="${top.get(index).getNickname()}">Christie</span>
+            <img src="img/people/45.jpg" th:src="@{|img/people/${top.get(index).getId()}.jpg|}"
+                 th:alt="${top.get(index).getNickname()}" alt="Christie">
+            <span>Votes: <span th:text="${top.get(index).getVoteCount()}">1320</span></span>
         </div>
     </div>
 </section>

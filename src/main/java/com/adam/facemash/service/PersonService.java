@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -70,5 +71,9 @@ public class PersonService {
         while (returnValue[1] == returnValue[0])
             returnValue[1] =  rand.nextInt(((max - min) + 1) + min);
         return returnValue;
+    }
+
+    public List<Person> getTop10() {
+        return personRepository.findTop10();
     }
 }
