@@ -31,4 +31,16 @@ public class Person {
     public int getVoteCount() {
         return voteCount;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
+    }
 }
