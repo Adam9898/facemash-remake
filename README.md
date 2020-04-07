@@ -1,4 +1,4 @@
-#facemash-remake
+# facemash-remake #
 The original creator of facemash was Mark Zuckerberg. The main idea behind this small web app
 is that it lets you compare 2 people, based on their photo.
 It was probably coded in php or something similar, but I used
