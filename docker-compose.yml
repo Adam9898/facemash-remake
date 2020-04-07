@@ -14,7 +14,7 @@ services:
         image: "mysql"
         volumes:
             - type: bind
-              source: src/main/resources/data-docker.sql
+              source: ./src/main/resources/data-docker.sql
               target: /docker-entrypoint-initdb.d/data-docker.sql
         environment:
             - MYSQL_DATABASE=facemash
