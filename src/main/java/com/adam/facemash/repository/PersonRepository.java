@@ -33,6 +33,4 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 
     @Query(value = "SELECT * FROM people ORDER BY vote_count DESC LIMIT 10", nativeQuery = true)
     List<Person> findTop10();
-
-
 }

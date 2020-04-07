@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+    web:
+        build: .
+        ports:
+        - 8080:8080
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://database/facemash?useSSL=false&allowPublicKeyRetrieval=true
+        depends_on:
+            - database
+        restart: always
+    database:
+        image: "mysql"
+        volumes:
+            - type: bind
+              source: src/main/resources/data-docker.sql
+              target: /docker-entrypoint-initdb.d/data-docker.sql
+        environment:
+            - MYSQL_DATABASE=facemash
+            - MYSQL_ROOT_PASSWORD=secret
+        restart: always

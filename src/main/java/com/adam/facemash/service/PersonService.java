@@ -68,8 +68,11 @@ public class PersonService {
         Random rand = new Random();
         returnValue[0] = rand.nextInt(max + 1 - min) + min;
         returnValue[1] = rand.nextInt(max + 1 - min) + min;
-        while (returnValue[1] == returnValue[0])
-            returnValue[1] =  rand.nextInt(max + 1 - min) + min;
+        int tryCount = 0;
+        while (returnValue[1] == returnValue[0] && tryCount < 6) {
+            tryCount++;
+            returnValue[1] = rand.nextInt(max + 1 - min) + min;
+        }
         return returnValue;
     }
 

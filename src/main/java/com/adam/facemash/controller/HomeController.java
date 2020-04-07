@@ -87,13 +87,19 @@ public class HomeController {
     public String appRoute(Model model, Principal principal) {
         String returnValue = "main";
         Person[] generatedPeople = personService.generatePeople(principal.getName());
-        if (personService.noMorePersonLeft(generatedPeople) || generatedPeople.length < 2) {
+        if (shouldReturnEmptyPage(generatedPeople)) {
             returnValue = "empty";
         } else {
             model.addAttribute("girls", generatedPeople);
             model.addAttribute("vote", new Vote());
         }
         return returnValue;
+    }
+
+    private boolean shouldReturnEmptyPage(Person[] generatedPeople) {
+        return personService.noMorePersonLeft(generatedPeople)
+                || generatedPeople.length < 2
+                || generatedPeople[0] == generatedPeople[1];
     }
 
     @Secured("ROLE_REGULAR")

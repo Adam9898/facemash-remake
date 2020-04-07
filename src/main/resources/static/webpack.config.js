@@ -11,7 +11,6 @@ module.exports = {
         libraryExport: 'default',
         library: 'LogicConnector',
     },
-    watch: true,
     plugins: [new MiniCssExtractPlugin({ filename: 'css/styles.css' })],
     module: {
         rules: [

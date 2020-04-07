@@ -47,6 +47,7 @@ test {
 
 bootJar {
     mainClassName = 'com.adam.facemash.FacemashApplication'
+    archiveName = 'facemash-app.jar'
 }
 
 jar {
@@ -60,6 +61,5 @@ jar {
         )
     }
     destinationDirectory = file("$rootDir/build/jar")
-    archivesBaseName = 'facemash-app'
     enabled = true
 }
